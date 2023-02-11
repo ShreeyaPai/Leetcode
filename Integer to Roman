@@ -1,0 +1,117 @@
+char* conO(int,char*);
+char* conT(int n,char* s);
+char* conH(int n,char* s);
+char* conTH(int n,char* s);
+
+char * intToRoman(int num){
+//1-4000 th,h,t,o
+char*s;
+s=(char*)calloc(20,sizeof(char));
+int th=0,h=0,t=0,o=0;
+th=(num/1000);
+h=((num-th*1000)/100);
+t=((num-th*1000-h*100)/10);
+o=(num-th*1000-h*100-t*10);
+printf("%d %d %d %d",th,h,t,o);
+s=conTH(th,s);
+s=conH(h,s);
+s=conT(t,s);
+s=conO(o,s);
+return s;
+}
+char* conO(int n,char* s)
+{
+    switch(n)
+    {
+    case 0:return s;break;
+    case 1:
+    case 2:
+    case 3:if(n<=3)
+           {
+            for(int i=0;i<n;i++)
+            strcat(s,"I");
+           }return s;break;
+    case 4: if(n==4)
+            {
+               strcat(s,"IV"); 
+            }return s;break;
+    case 5:
+    case 6:
+    case 7:
+    case 8: strcat(s,"V");
+            for(int i=5;i<n;i++)
+            strcat(s,"I");return s;break;
+    case 9: strcat(s,"IX");return s;break;
+    }
+    return s;   
+}
+
+char* conT(int n,char* s)
+{
+    switch(n)
+    {
+    case 0:return s;break;
+    case 1:
+    case 2:
+    case 3:if(n<=3)
+           {
+            for(int i=0;i<n;i++)
+            strcat(s,"X");
+           }return s;break;
+    case 4: if(n==4)
+            {
+               strcat(s,"XL"); 
+            }return s;break;
+    case 5:
+    case 6:
+    case 7:
+    case 8: strcat(s,"L");
+            for(int i=5;i<n;i++)
+            strcat(s,"X");return s;break;
+    case 9: strcat(s,"XC");return s;break;
+    }
+    return s;
+}
+
+char* conH(int n,char* s)
+{
+    switch(n)
+    {
+    case 0:return s;break;
+    case 1:
+    case 2:
+    case 3:if(n<=3)
+           {
+            for(int i=0;i<n;i++)
+            strcat(s,"C");
+           }return s;break;
+    case 4: if(n==4)
+            {
+               strcat(s,"CD"); 
+            }return s;break;
+    case 5:
+    case 6:
+    case 7:
+    case 8: strcat(s,"D");
+            for(int i=5;i<n;i++)
+            strcat(s,"C");return s;break;
+    case 9: strcat(s,"CM");return s;break;
+    }
+    return s;  
+}
+
+char* conTH(int n,char* s)
+{
+    switch(n)
+    {
+    case 0:return s;break;
+    case 1:
+    case 2:
+    case 3:if(n<=3)
+           {
+            for(int i=0;i<n;i++)
+            strcat(s,"M");
+           }return s;break;
+    }
+    return s;
+}
