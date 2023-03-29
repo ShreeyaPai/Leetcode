@@ -1,0 +1,87 @@
+/*  Definition for singly-linked list.
+struct ListNode {  int val;
+    struct ListNode *next;
+ };
+*/ 
+
+ struct ListNode* create()
+ {
+     struct ListNode* ptr=(struct ListNode*)malloc(sizeof(struct ListNode));
+     return ptr;
+ }
+struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
+    int value,sum,carry=0,c1=0,c2=0,i=0;
+    //struct ListNode* first=NULL;
+    struct ListNode* tn=l1;
+    while(tn!=NULL)
+    {
+        c1++;
+        tn=tn->next;
+    }
+    tn=l2;
+    while(tn!=NULL)
+    {
+        c2++;
+        tn=tn->next;
+    }
+    int count=(c1>c2)?c1:c2;
+    int* A=(int*)malloc((count+1)*sizeof(int));
+    *(A+count)=-1;
+    printf("%d\n",count+1);
+    while(l1!=NULL && l2!=NULL)
+    {
+        value=l1->val+l2->val+carry;
+        sum=value%10;
+        carry=value/10;
+        A[i++]=sum;
+        l1=l1->next;
+        l2=l2->next;   
+    }
+    
+    if(l1!=NULL)
+    {
+        while(l1!=NULL)
+        {
+            value=l1->val+carry;
+            sum=value%10;
+            carry=value/10;
+            l1=l1->next;
+            A[i++]=sum;
+        }
+    }
+    if(l2!=NULL)
+    {
+        while(l2!=NULL)
+        {
+            value=l2->val+carry;
+            sum=value%10;
+            carry=value/10;
+            l2=l2->next;
+            A[i++]=sum;
+        }
+    }
+    printf("Carry %d\n",carry);
+    if(carry!=0)
+    A[i]=carry;
+    struct ListNode* pn=NULL;
+    printf("%d\n",count);
+    if(*(A+count)==-1)
+    count-=1;
+    printf("%d\n",count);
+    struct ListNode*first=create();
+    first->next=NULL;
+    first->val=*A;
+    pn=first;
+    for(int i=1;i<count+1;i++)
+    {
+        printf("%d  ",*(A+i));
+        struct ListNode* element=create();
+        element->next=NULL;
+        element->val=*(A+i);
+        pn->next=element;
+        pn=pn->next;
+    }
+
+
+    return first;
+}
